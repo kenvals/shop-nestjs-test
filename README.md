@@ -1,4 +1,4 @@
-## Тестовый проект Products API
+## Описание - Тестовый проект Products API
 
 Обязательные поля товара: id, name.
 
@@ -15,3 +15,27 @@
 
 ## Поднятие MYSQL
 docker-compose up -d
+
+## Запуск
+- Создать файл .env (ENV FILE)
+
+```
+DB_HOST='127.0.0.1'
+DB_PORT=3308
+DB_USERNAME='root'
+DB_PASSWORD='root'
+DB_DATABASE='new_base'
+DB_SYNCH=true
+```
+
+- Собрать пакеты из учета локального репозитория package.json (Без sudo может быть ошибка, из-за bcrypt, которому необходим хлам ОС)
+
+```
+sudo npm install
+```
+
+- Запустить проект в режиме горячей отладки 
+
+```
+npm run start:dev
+```
