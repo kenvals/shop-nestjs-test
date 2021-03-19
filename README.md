@@ -1,16 +1,17 @@
-version: "3.9"
-    
-services:
-  db:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: kenval
-      MYSQL_DATABASE: shop
-      MYSQL_USER: kenval
-      MYSQL_PASSWORD: kenval
+## Тестовый проект Products API
 
-volumes:
-  db_data: {}
+Обязательные поля товара: id, name.
+
+Требуемые методы в API:
+
+Публичные:
+– Список товаров, с постраничным разбиением
+– Получение товара по id (добавить кеширование на 1 минуту)
+– Авторизация по почте и паролю. Возвращает JWT
+
+Приватные (Авторизация по JWT):
+– Добавление товара
+– Редактирование товара по id
+
+## Поднятие MYSQL
+docker-compose up -d

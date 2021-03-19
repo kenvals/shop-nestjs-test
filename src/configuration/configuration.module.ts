@@ -1,9 +1,15 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigurationService } from './configuration.service';
+import { ConfigService } from './config.service';
+import { DatabaseConfigService } from './database.providers';
 
 @Module({
-  
-  providers: [ConfigurationService]
+  providers: [
+    ConfigService,
+    DatabaseConfigService,
+  ],
+  exports: [
+    DatabaseConfigService,
+    ConfigService,
+  ],
 })
-export class ConfigurationModule { }
+export class ConfigurationModule {}

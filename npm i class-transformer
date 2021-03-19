@@ -1,0 +1,13 @@
+{
+	"info": {
+		"_postman_id": "bc7ec793-fec5-43cd-8048-2cc0d9d05a9c",
+		"name": "Lucy collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": []
+		}
+	]
+}
