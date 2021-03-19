@@ -1,0 +1,9 @@
+node_modules
+.env
+git.env
+dist
+.idea/*
+logs/*
+*.zip
+*.mail_event
+.vscode/
