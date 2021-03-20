@@ -9,6 +9,7 @@ export class Swagger {
         'Тестовое задание на создание документированного API для интернет-магазина'
       )
       .setVersion('1.0')
+      .addBearerAuth()
       .build();
     const document = SwaggerModule.createDocument(app, options);
     SwaggerModule.setup('api', app, document);

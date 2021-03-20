@@ -7,7 +7,7 @@ import {
   NotFoundException,
   ForbiddenException,
 } from "@nestjs/common";
-import { ApiOperation, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { UsersService } from "src/users/user.service";
 import { UserLoginDto } from "./dto/user-auth.dto";
 import { UserJwtPayload } from "./interface/user-jwt-payload.interface";
@@ -21,6 +21,23 @@ export class AuthController {
 
   @ApiOperation({
     summary: "Get a token by login and password",
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Authorization was successful. Received JWT'
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Incorrect password entered'
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'such user does not exist'
+  })
+  @ApiBody({
+    required: true,
+    description: 'user authorization data',
+    type: UserLoginDto
   })
   @Post("login")
   @HttpCode(200)

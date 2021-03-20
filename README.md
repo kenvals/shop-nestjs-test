@@ -14,7 +14,7 @@ GET http://127.0.0.1:5000/api/products?limit=1&skip=0
 ```
 GET http://127.0.0.1:5000/api/products/fetch?id=2
 ```
-Кеш на 60 секунд
+Кэш на 60 секунд
 
 ### (выполнено)Авторизация по почте и паролю. Возвращает JWT
 ```
@@ -35,7 +35,6 @@ data (JSON):
 ```
 POST http://127.0.0.1:5000/api/products
 ```
-
 
 ```
 {
@@ -59,10 +58,13 @@ PATCH http://127.0.0.1:5000/api/products/fetch?id=2
 
 не забывай сначала получить токен, через авторизацию
 
-## Поднятие MYSQL
-docker-compose up -d
 
 ## Запуск
+- (опционально) Поднятие MYSQL.
+```
+docker-compose up -d
+```
+
 - Создать файл .env (ENV FILE)
 
 ```
@@ -90,4 +92,9 @@ npm run start:dev
 
 ```
 http://127.0.0.1:5000/api
+```
+
+- Если не удобен Swagger OpenAPI (например как мне, можно использовать Postman Collection)
+```
+Lucy collection.postman_collection.json (импортировать в postman)
 ```
