@@ -1,4 +1,4 @@
 export interface UserJwtPayload {
     id: number,
-    login: string
+    email: string
   }

@@ -35,10 +35,10 @@ export class UsersService {
   }
     /**
    * Поиск пользователя в БД по логину
-   * @param login логин пользователя
+   * @param email логин пользователя
    */
-     findUserByLogin(login: string): Promise<UserEntity> {
-      return this.userRepository.findOne({ where: { login } });
+     findUserByEmail(email: string): Promise<UserEntity> {
+      return this.userRepository.findOne({ where: { email } });
     }
 
         /**
@@ -52,7 +52,7 @@ export class UsersService {
     
             /**
    * Создание токена доступа
-   * @param login
+   * @param email
    */
      async createToken(payload: IJwtPayload): Promise<string> {
       const expiresIn = '1d';

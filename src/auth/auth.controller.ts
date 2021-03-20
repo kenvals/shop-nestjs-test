@@ -26,11 +26,11 @@ export class AuthController {
   @HttpCode(200)
   async create(@Body() userData: UserLoginDto) {
     try {
-      const user = await this.userService.findUserByLogin(userData.login);
+      const user = await this.userService.findUserByEmail(userData.email);
 
       if (!user) {
         throw new NotFoundException(
-          `${userData.login} is not found`
+          `User ${userData.email} is not found`
         );
       }
 
@@ -45,7 +45,7 @@ export class AuthController {
 
       const payload: UserJwtPayload = {
         id: user.id,
-        login: user.login,
+        email: user.email,
       };
 
       delete user.password;

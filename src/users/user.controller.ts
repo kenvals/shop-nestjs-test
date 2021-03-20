@@ -20,7 +20,7 @@ export class UserController {
     // type: UserDto,
   })
   @ApiConflictResponse({
-    description: 'The user with the entered login exists',
+    description: 'The user with the entered email exists',
   })
   @Post('signup')
   create(@Body(UniqueUserPipe) createUserDto: CreateUserDto) {

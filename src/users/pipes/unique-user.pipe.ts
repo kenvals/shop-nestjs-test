@@ -12,10 +12,10 @@ export class UniqueUserPipe implements PipeTransform {
   constructor(private readonly userService: UsersService) {}
 
   async transform(userObject: CreateUserDto) {
-    const isUser = await this.userService.findUserByLogin(userObject.login);
+    const isUser = await this.userService.findUserByEmail(userObject.email);
     if (isUser) {
       throw new ConflictException(
-        'The user with the entered login exists'
+        'The user with the entered email exists'
       );
     }
     return userObject;
