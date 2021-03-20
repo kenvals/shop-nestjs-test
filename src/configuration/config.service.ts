@@ -25,9 +25,7 @@ export class ConfigService {
    */
   private getConfigFileName() {
     const fileName = process.env.NODE_ENV || '';
-    const filePath = `./${fileName}.env`;
-
-    console.log(filePath);
+    const filePath = `./${fileName}.env`
 
     return filePath;
   }

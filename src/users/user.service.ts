@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { plainToClass } from 'class-transformer';
-import { Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UserEntity } from './entities/user.entity';
-import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
-import { IJwtPayload } from 'src/auth/interface/jwt-payload.interface';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { plainToClass } from "class-transformer";
+import { Repository } from "typeorm";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UserEntity } from "./entities/user.entity";
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
+import { IJwtPayload } from "src/auth/interface/jwt-payload.interface";
 
 @Injectable()
 export class UsersService {
@@ -14,13 +14,12 @@ export class UsersService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>
   ) {}
-  
+
   /**
    * Добавление нового пользователя
    * @param userData данные пользователя
    */
-   async create(userData: CreateUserDto): Promise<UserEntity> {
-
+  async create(userData: CreateUserDto): Promise<UserEntity> {
     const user = plainToClass(UserEntity, userData);
 
     try {
@@ -33,34 +32,20 @@ export class UsersService {
       throw error;
     }
   }
-    /**
+  /**
    * Поиск пользователя в БД по логину
    * @param email логин пользователя
    */
-     findUserByEmail(email: string): Promise<UserEntity> {
-      return this.userRepository.findOne({ where: { email } });
-    }
+  findUserByEmail(email: string): Promise<UserEntity> {
+    return this.userRepository.findOne({ where: { email } });
+  }
 
-        /**
+  /**
    * Сравнивает пароль с хэшем
    * @param password пароль
    * @param hash хэш
    */
-         async compareHash(password: string, hash: string): Promise<boolean> {
-          return bcrypt.compare(password, hash);
-        }
-    
-            /**
-   * Создание токена доступа
-   * @param email
-   */
-     async createToken(payload: IJwtPayload): Promise<string> {
-      const expiresIn = '1d';
-      const secretOrKey = 'secret';
-  
-      const token = jwt.sign(payload, secretOrKey, { expiresIn });
-  
-      return token;
-    }
-
+  async compareHash(password: string, hash: string): Promise<boolean> {
+    return bcrypt.compare(password, hash);
+  }
 }

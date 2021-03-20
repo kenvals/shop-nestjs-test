@@ -28,14 +28,12 @@ export class ProductsService {
       throw error;
     }
   }
-  
+
   /**
    * Получение списка товаров по пагинации
    */
 
-  async fetchPaginatedProductList(
-    options,
-  ): Promise<Pagination<ProductEntity>> {
+  async fetchPaginatedProductList(options): Promise<Pagination<ProductEntity>> {
     const [results, total] = await this.productRepository.findAndCount({
       take: options.limit,
       skip: options.skip, // think this needs to be page * limit
@@ -47,22 +45,22 @@ export class ProductsService {
     });
   }
 
-
   async findOne(id: number) {
     try {
       const product = await this.productRepository.findOne(id);
 
       if (!product) {
-        throw new NotFoundException('cant find the current product');
+        throw new NotFoundException("cant find the current product");
       }
 
       return product;
     } catch (err) {
       throw err;
-    }  }
+    }
+  }
 
-  async update(productCard:ProductEntity, updateProductDto: UpdateProductDto) {
-    Object.keys(updateProductDto).forEach(key => {
+  async update(productCard: ProductEntity, updateProductDto: UpdateProductDto) {
+    Object.keys(updateProductDto).forEach((key) => {
       productCard[key] = updateProductDto[key];
     });
 
@@ -75,19 +73,19 @@ export class ProductsService {
     }
   }
 
-    /**
+  /**
    * Находит ID продукта или вызывает исключение
    * @param findConditions
    */
-     async findProductOrDie(findConditions: FindConditions<ProductEntity>) {
-      const productCard: ProductEntity = await this.productRepository.findOne({
-        where: findConditions,
-      });
-  
-      if (!productCard) {
-        throw new NotFoundException(`The requested product does not exist`);
-      }
-  
-      return productCard;
+  async findProductOrDie(findConditions: FindConditions<ProductEntity>) {
+    const productCard: ProductEntity = await this.productRepository.findOne({
+      where: findConditions,
+    });
+
+    if (!productCard) {
+      throw new NotFoundException(`The requested product does not exist`);
     }
+
+    return productCard;
+  }
 }

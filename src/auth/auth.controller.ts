@@ -68,7 +68,7 @@ export class AuthController {
       delete user.password;
 
       const result = {
-        token: await this.userService.createToken({ type, payload }),
+        token: await this.authService.createToken({ type, payload }),
         user,
       };
 

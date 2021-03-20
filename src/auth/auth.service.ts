@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/user.service';
 import { IJwtPayload } from './interface/jwt-payload.interface';
 import { UserJwtPayload } from './interface/user-jwt-payload.interface';
-
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
@@ -22,4 +22,18 @@ export class AuthService {
           return this.usersService.findUserByEmail(userPayload.email);
         }
       }
+
+
+                  /**
+   * Создание токена доступа
+   * @param email
+   */
+     async createToken(payload: IJwtPayload): Promise<string> {
+      const expiresIn = '1d';
+      const secretOrKey = 'secret';
+  
+      const token = jwt.sign(payload, secretOrKey, { expiresIn });
+  
+      return token;
+    }
 }

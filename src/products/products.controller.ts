@@ -18,7 +18,15 @@ import {
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiPropertyOptional, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiOperation,
+  ApiPropertyOptional,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
 import { ApiParseIntPipe } from "./pipe/api-parse-int.pipe";
 import { IFindPaginateOptions } from "./interface/find-paginate.interface";
 import { InQueryProductListDto } from "./dto/in-query-product-list.dto";
@@ -37,17 +45,17 @@ export class ProductsController {
   })
   @ApiResponse({
     status: 201,
-    description: 'Product added successfully',
+    description: "Product added successfully",
   })
   @ApiResponse({
     status: 401,
-    description: 'User is not authorized',
+    description: "User is not authorized",
     type: UnauthorizedException,
   })
   @ApiBody({
     required: true,
-    description: 'Data possessed by a new product',
-    type: CreateProductDto
+    description: "Data possessed by a new product",
+    type: CreateProductDto,
   })
   @ApiBearerAuth()
   @Post()
@@ -62,25 +70,24 @@ export class ProductsController {
   })
   @ApiResponse({
     status: 200,
-    description: 'products loaded successfully by pagination'
+    description: "products loaded successfully by pagination",
   })
   @ApiQuery({
-    name: 'limit',
+    name: "limit",
     required: true,
-    description: 'Number of records to display',
+    description: "Number of records to display",
     type: Number,
   })
   @ApiQuery({
-    name: 'skip',
+    name: "skip",
     required: true,
-    description: 'How many records to skip relative to the first',
+    description: "How many records to skip relative to the first",
     type: Number,
   })
-  
   @Get()
   async findAll(
     @Query("limit", ApiParseIntPipe) limit: number,
-    @Query("skip", ApiParseIntPipe) skip: number,
+    @Query("skip", ApiParseIntPipe) skip: number
   ) {
     try {
       return await this.productsService.fetchPaginatedProductList({
@@ -97,16 +104,16 @@ export class ProductsController {
   })
   @ApiResponse({
     status: 200,
-    description: 'get a specific essence of the product by id'
+    description: "get a specific essence of the product by id",
   })
   @ApiResponse({
     status: 404,
-    description: 'Product not found in the database'
+    description: "Product not found in the database",
   })
   @ApiQuery({
-    name: 'id',
+    name: "id",
     required: true,
-    description: 'Product identifier in the database',
+    description: "Product identifier in the database",
     type: Number,
   })
   @Get("fetch")
@@ -121,16 +128,16 @@ export class ProductsController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Product changed successfully'
+    description: "Product changed successfully",
   })
   @ApiResponse({
     status: 401,
-    description: 'User is not logged in'
+    description: "User is not logged in",
   })
   @ApiBody({
     required: true,
-    description: 'Data that needs to be changed (being validated)',
-    type: UpdateProductDto
+    description: "Data that needs to be changed (being validated)",
+    type: UpdateProductDto,
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
@@ -142,7 +149,3 @@ export class ProductsController {
     return this.productsService.update(productCard, updateProductDto);
   }
 }
-function ApiModelProperty(arg0: { description: string; example: string; uniqueItems: boolean; }) {
-  throw new Error("Function not implemented.");
-}
-
